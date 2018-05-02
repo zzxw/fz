@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cn.bs.dao.TicketDao">
+	<update id="sellTicket"
+	  parameterType="string">
+	 update 
+	 ticket set TicketNum = TicketNum -1 
+	 where TrainCode =#{trainCode}
+	</update>
+	
+	<update id="refundTicket"
+	  parameterType="string">
+	 update 
+	 ticket set TicketNum = TicketNum +1 
+	 where TrainCode =#{trainCode}
+	</update>
+	
+	<select id="queryByCode"	
+		parameterType="string"
+		resultType="cn.bs.entity.Ticket">
+		select *
+		from
+		ticket
+		where
+			TrainCode = #{TrainCode}
+	</select>
+	
+	<select id="queryTicket"
+	   parameterType="string" 
+	   resultType="map">
+	    select *
+		from
+		ticket
+		where
+			 StartStation =#{startStation} and ArriveStation = #{arriveStation} and date = #{date}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+

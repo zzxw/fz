@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cn.bs.dao.OrderDao">
+	<insert id="addOrder"
+		parameterType="cn.bs.entity.Order">
+		insert into tbl_order
+(trainCode,startStation,startTime,arriveStation,
+arriveTime,username,userIdNum,ticketPrice,date,status) 
+values
+(#{trainCode},#{startStation},#{startTime},#{arriveStation},#{arriveTime},
+#{username},#{userIdNum},#{ticketPrice},#{date},#{status})
+	</insert>
+	
+	<delete id="deleteOrder" parameterType="int">
+	    delete 
+	    from tbl_order 
+	    where 
+	    id =#{id}
+	</delete>
+	
+	<update id="updateOrder" parameterType="cn.bs.entity.ChangeOrder">
+	    update 
+	    tbl_order 
+	    set trainCode = #{trainCode},startTime = #{startTime},
+	    arriveTime = #{arriveTime},
+	   	ticketPrice = #{ticketPrice},
+	    date = #{date},status=#{status} 
+	    where id=#{id}
+	</update>
+	
+	<select id="queryOrders"	
+		parameterType="string"
+		resultType="map">
+		select *
+			from
+		tbl_order
+		where
+			username = #{username}
+	</select>
+	
+	<select id="queryById"	
+		parameterType="int"
+		resultType="cn.bs.entity.Order">
+		select *
+			from
+		tbl_order
+		where
+			id=#{id}
+	</select>
+		
+</mapper>
+
+
+
+
+
+
+
+
+
+

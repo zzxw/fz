@@ -1,3 +1,4 @@
+test
 use drawing;
 drop table if exists sequesce;
 create table sequence (

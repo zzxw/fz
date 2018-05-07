@@ -17,7 +17,7 @@ public class ProjectServiceImpl implements ProjectService {
 	@Resource
 	private ProjectDao projectDao;
 	public Project add(Project project) {
-		if(Tools.isEmpty(project.getpName() + project.getUnitName() + project.getContacts())){
+		if(Tools.isEmpty(project.getpName() + project.getUnitName() + project.getContacts() + project.getcPhone())){
 			throw new NameException("必填信息不能为空，请检查后重新输入提交");
 		}
 		String phoneReg = "^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$";
@@ -26,7 +26,7 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 		boolean isSuccess = projectDao.add(project);
 		if(!isSuccess) {
-			throw new NameException("创建项目信息失败，请稍后重新尝试");
+			throw new NameException("创建项目失败，请稍后重新尝试");
 		}
 		return project;
 	}
@@ -40,6 +40,9 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	public boolean delete(int id) {
+		if(id<0) {
+			throw new NameException("发生了未知错误，请选择要删除的记录重启尝试");
+		}
 		boolean isSuccess = projectDao.delete(id);
 		if(!isSuccess) {
 			throw new NameException("删除项目信息失败，请稍候重新尝试");
@@ -48,6 +51,9 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	public Project search(int id) {
+		if(id<0) {
+			throw new NameException("发生了未知错误，请选择要删除的记录重启尝试");
+		}
 		Project project = projectDao.serarch(id);
 		if(project == null) {
 			throw new NameException("该项目不存在");

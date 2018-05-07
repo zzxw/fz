@@ -1,10 +1,93 @@
 package cn.bs.web;
 
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import cn.bs.entity.NUser;
+import cn.bs.entity.Project;
+import cn.bs.entity.User;
+import cn.bs.service.ProjectService;
+import cn.bs.service.UserService;
+import cn.bs.util.JsonResult;
 
 @Controller
 @RequestMapping("/Project")
 public class ProjectController {
+	@Resource
+	private UserService userService;
+	
+	@Resource
+	private ProjectService projectService;
+	
+	@RequestMapping("/add.do")
+	@ResponseBody
+	//返回值：{state:0,data:{id...}}
+	//返回值：{state:1,message:"用户名..."}
+
+	public JsonResult<Project> add(int uid,String name,int checkId,int authorizedId,String majorType,String pName,
+			int pType,String unitName,String contacts,String cPhone,int status,String blueprint){
+		Project project = new Project();
+		project.setAuthorizedId(authorizedId);
+		project.setBlueprint(blueprint);
+		project.setCheckId(checkId);
+		project.setContacts(contacts);
+		project.setcPhone(cPhone);
+		project.setMajorType(majorType);
+		project.setpName(pName);
+		project.setpType(pType);
+		project.setStatus(status);
+		project.setUid(uid);
+		project.setUnitName(unitName);
+		projectService.add(project);
+		return new JsonResult<Project>(project);
+	}
+	/**
+	 * 注册控制器
+	 */
+	@RequestMapping("/update.do")
+	@ResponseBody
+	public JsonResult<Project> update(
+			int uid,String name,int checkId,int authorizedId,String majorType,String pName,
+			int pType,String unitName,String contacts,String cPhone,int status,String blueprint){
+		Project project = new Project();
+		project.setAuthorizedId(authorizedId);
+		project.setBlueprint(blueprint);
+		project.setCheckId(checkId);
+		project.setContacts(contacts);
+		project.setcPhone(cPhone);
+		project.setMajorType(majorType);
+		project.setpName(pName);
+		project.setpType(pType);
+		project.setStatus(status);
+		project.setUid(uid);
+		project.setUnitName(unitName);
+		projectService.update(project);
+		return new JsonResult<Project>(project);
+	}
+	@RequestMapping("/delete.do")
+	@ResponseBody
+	public JsonResult<Boolean> delete(int id){
+		boolean isTrue = projectService.delete(id);
+		return new JsonResult<Boolean>(isTrue);
+	}
+	
+	@RequestMapping("/find.do")
+	@ResponseBody
+	public JsonResult<Project> find(int id){
+		Project project = projectService.search(id);
+		return new JsonResult<Project>(project);
+	}
+	
+	@RequestMapping("/searchProjects.do")
+	@ResponseBody
+	public JsonResult<List<Project>> searchProjects(){
+		List<Project> list = projectService.findProjects();
+		return new JsonResult<List<Project>>(list);
+	}
 	
 }

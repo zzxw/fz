@@ -1,5 +1,7 @@
 package cn.bs.web;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -18,13 +20,12 @@ public class WorkerController {
 	
 	@RequestMapping("/regist.do")
 	@ResponseBody
-	public JsonResult<Worker> regist(String uName,String pwd,String phone,String mail,int userType){
+	public JsonResult<Worker> regist(String uName,String pwd,String phone,String mail){
 		Worker worker = new Worker();
 		worker.setMail(mail);
 		worker.setPhone(phone);
 		worker.setPwd(pwd);
 		worker.setuName(uName);
-		worker.setUserType(userType);
 		workService.regist(worker);
 		return new JsonResult<Worker>(worker);
 	}
@@ -46,5 +47,12 @@ public class WorkerController {
 	public JsonResult<Worker> find(String name){
 		Worker worker=workService.findByName(name);
 		return new JsonResult<Worker>(worker);
+	}
+	
+	@RequestMapping("/findWorker.do")
+	@ResponseBody
+	public JsonResult<List<String>> findWorkers(){
+		List<String> list = workService.findUser();
+		return new JsonResult<List<String>>(list);
 	}
 }

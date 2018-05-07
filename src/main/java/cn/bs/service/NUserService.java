@@ -1,5 +1,7 @@
 package cn.bs.service;
 
+import java.util.List;
+
 import cn.bs.entity.NUser;
 
 public interface NUserService {
@@ -7,4 +9,5 @@ public interface NUserService {
 	NUser login(String name,String pwd);
 	NUser regist(NUser user);
 	boolean updateInfo(NUser nUser);
+	List<String> findUsers();
 }

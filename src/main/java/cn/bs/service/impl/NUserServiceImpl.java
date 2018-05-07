@@ -1,5 +1,8 @@
 package cn.bs.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import cn.bs.dao.NUserDao;
@@ -42,15 +45,7 @@ public class NUserServiceImpl implements NUserService {
 		if(nUser!=null){
 			throw new NameException("该用户名已存在！！！请更换用户名重新注册");
 		}
-		String passwordReg= "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$";
-		if(!user.getPwd().matches(passwordReg)){
-			throw new PasswordException("密码要在8-16字符之间，且必须为数字和字母的组合");
-		}
-		//String emailReg = "^[A-Za-z0-9\\u4e00-\\u9fa5]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$";
-		String phoneReg = "^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$";
-		if(!user.getPhone().matches(phoneReg)){
-			throw new NameException("手机号格式不正确，请仔细检查!!!");
-		}
+		checkInfo(user);
 		int i = userDao.regist(user);
 		if(i!=1){
 			throw new NameException("注册失败，请重新尝试");
@@ -62,19 +57,34 @@ public class NUserServiceImpl implements NUserService {
 		if(Tools.isEmpty(user.getuName() + user.getPwd())){
 			throw new NameException("用户名或密码不能为空");
 		}
-		String passwordReg= "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$";
-		if(!user.getPwd().matches(passwordReg)){
-			throw new PasswordException("密码要在8-16字符之间，且必须为数字和字母的组合");
-		}
-		String phoneReg = "^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$";
-		if(!user.getPhone().matches(phoneReg)){
-			throw new NameException("手机号格式不正确，请仔细检查!!!");
-		}
+		checkInfo(user);
 		int i = userDao.updateInfo(user);
 		if(i!=1){
 			throw new NameException("修改信息失败，请重新尝试");
 		}
 		return true;
 	}
+	public void checkInfo(NUser user){
+		String passwordReg= "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$";
+		if(!Tools.isEmpty(user.getPwd()) && !user.getPwd().matches(passwordReg)){
+			throw new PasswordException("密码要在8-16字符之间，且必须为数字和字母的组合");
+		}
+		String phoneReg = "^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$";
+		if(!Tools.isEmpty(user.getPhone()) && !user.getPhone().matches(phoneReg)){
+			throw new NameException("手机号格式不正确，请仔细检查!!!");
+		}
+		String emailReg = "^[A-Za-z0-9\\u4e00-\\u9fa5]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$";
+		if(!Tools.isEmpty(user.getMail()) && !user.getMail().matches(emailReg)) {
+			throw new NameException("邮箱格式不正确，请检查后重新输入!!!");
+		}
+	}
 
+	public List<String> findUsers() {
+		List<NUser> list = userDao.findUsers();
+		List<String> result = new ArrayList<String>();
+		for (NUser nUser : list) {
+			result.add(nUser.getuName());
+		}
+		return result;
+	}
 }

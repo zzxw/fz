@@ -2,52 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
-<mapper namespace="cn.bs.dao.OrderDao">
-	<insert id="addOrder"
-		parameterType="cn.bs.entity.Order">
-		insert into tbl_order
-(trainCode,startStation,startTime,arriveStation,
-arriveTime,username,userIdNum,ticketPrice,date,status) 
+<mapper namespace="cn.bs.dao.WorkerDao">
+	<insert id="regist"
+		parameterType="cn.bs.entity.Worker">
+		insert into worker
+(uName,pwd,phone,mail) 
 values
-(#{trainCode},#{startStation},#{startTime},#{arriveStation},#{arriveTime},
-#{username},#{userIdNum},#{ticketPrice},#{date},#{status})
+(#{uName},#{pwd},#{phone},#{mail})
 	</insert>
 	
-	<delete id="deleteOrder" parameterType="int">
+	<!-- <delete id="deleteOrder" parameterType="int">
 	    delete 
 	    from tbl_order 
 	    where 
 	    id =#{id}
-	</delete>
+	</delete> -->
 	
-	<update id="updateOrder" parameterType="cn.bs.entity.ChangeOrder">
+	<update id="update" parameterType="cn.bs.entity.Worker">
 	    update 
-	    tbl_order 
-	    set trainCode = #{trainCode},startTime = #{startTime},
-	    arriveTime = #{arriveTime},
-	   	ticketPrice = #{ticketPrice},
-	    date = #{date},status=#{status} 
+	    worker 
+	    set uName = #{uName},pwd = #{pwd},
+	    phone = #{phone},
+	   	mail = #{mail}
 	    where id=#{id}
 	</update>
 	
-	<select id="queryOrders"	
-		parameterType="string"
-		resultType="map">
+	<select id="findUser"	
+		resultType="list">
 		select *
 			from
-		tbl_order
-		where
-			username = #{username}
+		worker
 	</select>
 	
-	<select id="queryById"	
-		parameterType="int"
-		resultType="cn.bs.entity.Order">
+	<select id="findByName"	
+		parameterType="String"
+		resultType="cn.bs.entity.Worker">
 		select *
 			from
-		tbl_order
+		worker
 		where
-			id=#{id}
+			uName=#{uName}
 	</select>
 		
 </mapper>

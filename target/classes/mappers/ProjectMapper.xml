@@ -2,52 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
-<mapper namespace="cn.bs.dao.OrderDao">
-	<insert id="addOrder"
-		parameterType="cn.bs.entity.Order">
-		insert into tbl_order
-(trainCode,startStation,startTime,arriveStation,
-arriveTime,username,userIdNum,ticketPrice,date,status) 
+<mapper namespace="cn.bs.dao.ProjectDao">
+	<insert id="add"
+		parameterType="cn.bs.entity.Project">
+		insert into projects
+(uid,checkId,authorizedId,majorType,pName,pType,unitName,contacts,cPhone,status,blueprint) 
 values
-(#{trainCode},#{startStation},#{startTime},#{arriveStation},#{arriveTime},
-#{username},#{userIdNum},#{ticketPrice},#{date},#{status})
+(#{uid},#{checkId},#{authorizedId},#{majorType},#{pName},#{pType},#{unitName},#{contacts},#{cPhone},#{status},#{blueprint})
 	</insert>
-	
-	<delete id="deleteOrder" parameterType="int">
+	<delete id="delete" parameterType="int">
 	    delete 
-	    from tbl_order 
+	    from projects 
 	    where 
-	    id =#{id}
+	    pid =#{pid}
 	</delete>
 	
-	<update id="updateOrder" parameterType="cn.bs.entity.ChangeOrder">
+	<update id="update" parameterType="cn.bs.entity.Project">
 	    update 
-	    tbl_order 
-	    set trainCode = #{trainCode},startTime = #{startTime},
-	    arriveTime = #{arriveTime},
-	   	ticketPrice = #{ticketPrice},
-	    date = #{date},status=#{status} 
-	    where id=#{id}
+    	projects 
+	    set uid = #{uid},checkId = #{checkId},
+	    authorizedId = #{authorizedId},
+	   	majorType = #{majorType},pName = #{pName},pType=#{pType},cPhone = #{cPhone},status = #{status},
+	    contacts = #{contacts},unitName=#{unitName} ,blueprint=#{blueprint}
+    	where pid=#{pid}
 	</update>
 	
-	<select id="queryOrders"	
-		parameterType="string"
-		resultType="map">
+	<select id="search"	
+		parameterType="int"
+		resultType="cn.bs.entity.Project">
 		select *
 			from
-		tbl_order
-		where
-			username = #{username}
+		projects
+			where
+		pid = #{pid}
 	</select>
 	
-	<select id="queryById"	
-		parameterType="int"
-		resultType="cn.bs.entity.Order">
+	<select id="findProjects"	
+		resultType="list">
 		select *
 			from
-		tbl_order
-		where
-			id=#{id}
+		projects
 	</select>
 		
 </mapper>

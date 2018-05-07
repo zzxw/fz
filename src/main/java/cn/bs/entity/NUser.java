@@ -5,20 +5,24 @@ public class NUser {
 	private String uName;
 	private String pwd;
 	private String phone;
+	private String mail;
 	private String address;
 	private String major;
+	private int userType;
 	
 	public NUser() {
 		super();
 	}
 	
-	public NUser(int uid, String uName, String pwd, String phone, String address, String major) {
+	public NUser(int uid, String uName, String pwd,String mail,int userType,String phone, String address, String major) {
 		super();
 		this.uid = uid;
 		this.uName = uName;
 		this.pwd = pwd;
 		this.phone = phone;
+		this.mail = mail;
 		this.address = address;
+		this.userType = userType;
 		this.major = major;
 	}
 
@@ -61,6 +65,22 @@ public class NUser {
 	}
 	public void setMajor(String major) {
 		this.major = major;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public int getUserType() {
+		return userType;
+	}
+
+	public void setUserType(int userType) {
+		this.userType = userType;
 	}
 	
 }

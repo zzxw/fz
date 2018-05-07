@@ -6,18 +6,16 @@ public class Worker {
 	private String pwd;
 	private String phone;
 	private String mail;
-	private int userType;
 	public Worker() {
 		super();
 	}
-	public Worker(int uid, String uName, String pwd, String phone, String mail, int userType) {
+	public Worker(int uid, String uName, String pwd, String phone, String mail) {
 		super();
 		this.uid = uid;
 		this.uName = uName;
 		this.pwd = pwd;
 		this.phone = phone;
 		this.mail = mail;
-		this.userType = userType;
 	}
 	public int getUid() {
 		return uid;
@@ -58,14 +56,7 @@ public class Worker {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
-
-	public int getUserType() {
-		return userType;
-	}
-
-	public void setUserType(int userType) {
-		this.userType = userType;
-	}
+	
 	@Override
 	public String toString() {
 		return super.toString();

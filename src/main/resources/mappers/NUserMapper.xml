@@ -6,9 +6,9 @@
 	<insert id="regist"
 		parameterType="cn.bs.entity.NUser">
 		insert into users
-(uName,pwd,phone,mail,address,major,userType) 
-values
-(#{uName},#{pwd},#{phone},#{mail},#{address},#{major},#{userType})
+			(uName,pwd,phone,mail,address,major,userType) 
+		values
+			(#{uName},#{pwd},#{phone},#{mail},#{address},#{major},#{userType})
 	</insert>
 	
 	<!-- <delete id="deleteOrder" parameterType="int">
@@ -20,11 +20,17 @@ values
 	
 	<update id="updateInfo" parameterType="cn.bs.entity.NUser">
 	    update 
-	    users 
-	    set uName=#{uName}, pwd = #{pwd},phone = #{phone},mail = #{mail},
-	    phone = #{phone},
-	   	address = #{address},
-	    major = #{major},userType = #{userType} where id=#{id}
+	    	users 
+	    <set>
+	    	<if test="uName != null">uName=#{uName},</if>
+	    	<if test="pwd != null">pwd=#{pwd},</if>
+	    	<if test="phone != null">phone=#{phone},</if>
+	    	<if test="mail != null">mail=#{mail},</if>
+	    	<if test="address != null">address=#{address},</if>
+	    	<if test="userType != null">userType=#{userType},</if>
+	    	<if test="major != null">major=#{major}</if>
+	    </set> 
+		    where id=#{id}
 	</update>
 	
 	<select id="findByName"	
@@ -36,13 +42,16 @@ values
 		where
 			uName = #{uName}
 	</select>
-	<select id="findUsers"	
+	<select id="findUsersByMajor"
+		parameterType="string"	
 		resultType="list">
-		select *
-			from
-		users
-		where
-			major = #{major}
+		select * from users where major = #{major}
+	</select>
+	
+	<select id="findUsersByType"
+		parameterType="int"
+		resultType="list">
+		select * from users where userType=#{userType}		
 	</select>
 		
 </mapper>

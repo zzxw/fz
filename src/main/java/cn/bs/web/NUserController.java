@@ -55,10 +55,17 @@ public class NUserController {
 		return new JsonResult<NUser>(user);
 	}
 	
-	@RequestMapping("/findUsers.do")
+	@RequestMapping("/findUsersByMajor.do")
 	@ResponseBody
-	public JsonResult<List<String>> findUsers(){
-		List<String> list = nService.findUsers();
+	public JsonResult<List<String>> findUsersByMajor(String major){
+		List<String> list = nService.findUsersByMajor(major);
+		return new JsonResult<List<String>>(list);
+	}
+	
+	@RequestMapping("/findUsersByType.do")
+	@ResponseBody
+	public JsonResult<List<String>> findUsersByType(int userType){
+		List<String> list = nService.findUsersByType(userType);
 		return new JsonResult<List<String>>(list);
 	}
 }

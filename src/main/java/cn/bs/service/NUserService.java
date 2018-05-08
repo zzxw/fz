@@ -9,5 +9,6 @@ public interface NUserService {
 	NUser login(String name,String pwd);
 	NUser regist(NUser user);
 	boolean updateInfo(NUser nUser);
-	List<String> findUsers();
+	List<String> findUsersByMajor(String major);
+	List<String> findUsersByType(int userType);
 }

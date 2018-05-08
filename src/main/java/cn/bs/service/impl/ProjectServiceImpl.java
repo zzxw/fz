@@ -65,5 +65,13 @@ public class ProjectServiceImpl implements ProjectService {
 		List<Project> list = projectDao.findProjects();
 		return list;
 	}
+
+	public List<Project> findProjectsByStatus(int status) {
+		if(status < 0){
+			status = 0;
+		}
+		List<Project> list = projectDao.findProjectsByStatus(status);
+		return list;
+	}
 	
 }

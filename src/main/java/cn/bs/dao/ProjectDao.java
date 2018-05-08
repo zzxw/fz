@@ -11,4 +11,5 @@ public interface ProjectDao {
 	Project serarch(int id);
 	boolean delete(int id);
 	List<Project> findProjects();
+	List<Project> findProjectsByStatus(int status);
 }

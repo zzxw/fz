@@ -90,4 +90,10 @@ public class ProjectController {
 		return new JsonResult<List<Project>>(list);
 	}
 	
+	@RequestMapping("/searchProjectsByStatus.do")
+	@ResponseBody
+	public JsonResult<List<Project>> searchProjects(int status){
+		List<Project> list = projectService.findProjectsByStatus(status);
+		return new JsonResult<List<Project>>(list);
+	}
 }

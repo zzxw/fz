@@ -11,4 +11,5 @@ public interface ProjectService {
 	boolean delete(int id);
 	Project search(int id);
 	List<Project> findProjects();
+	List<Project> findProjectsByStatus(int status);
 }

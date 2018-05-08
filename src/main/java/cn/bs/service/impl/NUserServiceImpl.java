@@ -14,15 +14,15 @@ import cn.bs.tools.Tools;
 @Service("nUserService")
 public class NUserServiceImpl implements NUserService {
 	@Resource 
-	private NUserDao userDao;
+	private NUserDao nUserDao;
 	public NUser findByName(String name) {
 		if(Tools.isEmpty(name)){
 			throw new NameException("用户名不能为空");
 		}
-		NUser nUser = userDao.findByName(name);
-		if(userDao !=  null){
-			throw new NameException("该用户已存在，请更换用户名");
-		}
+		NUser nUser = nUserDao.findByName(name);
+		/*if(nUser ==  null){
+			throw new NameException("该用户不存在");
+		}*/
 		return nUser;
 	}
 
@@ -30,7 +30,7 @@ public class NUserServiceImpl implements NUserService {
 		if(Tools.isEmpty(name+pwd)){
 			throw new NameException("用户名和密码不能为空");
 		}
-		NUser user = userDao.findByName(name);
+		NUser user = nUserDao.findByName(name);
 		if(user == null || !pwd.equals(user.getPwd())){
 			throw new NameException("用户名或密码错误，请检查后重新输入");
 		}
@@ -46,7 +46,7 @@ public class NUserServiceImpl implements NUserService {
 			throw new NameException("该用户名已存在！！！请更换用户名重新注册");
 		}
 		checkInfo(user);
-		int i = userDao.regist(user);
+		int i = nUserDao.regist(user);
 		if(i!=1){
 			throw new NameException("注册失败，请重新尝试");
 		}
@@ -58,7 +58,7 @@ public class NUserServiceImpl implements NUserService {
 			throw new NameException("用户名或密码不能为空");
 		}
 		checkInfo(user);
-		int i = userDao.updateInfo(user);
+		int i = nUserDao.updateInfo(user);
 		if(i!=1){
 			throw new NameException("修改信息失败，请重新尝试");
 		}
@@ -80,7 +80,7 @@ public class NUserServiceImpl implements NUserService {
 	}
 
 	public List<String> findUsers() {
-		List<NUser> list = userDao.findUsers();
+		List<NUser> list = nUserDao.findUsers();
 		List<String> result = new ArrayList<String>();
 		for (NUser nUser : list) {
 			result.add(nUser.getuName());

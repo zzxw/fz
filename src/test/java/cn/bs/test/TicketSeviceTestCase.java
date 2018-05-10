@@ -6,12 +6,12 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import cn.bs.service.TicketService;
+//import cn.bs.service.TicketService;
 
 
 public class TicketSeviceTestCase 
 	extends BaseTestCase{
-	TicketService ts;
+/*	TicketService ts;
 	@Before
 	public void initService(){
 		ts=ctx.getBean(
@@ -27,7 +27,7 @@ public class TicketSeviceTestCase
 		data=ts.findTicket(startStation, arriveStation, date);
 		System.out.println(data);
 	}
-	
+	*/
 	
 	
 	

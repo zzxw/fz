@@ -6,32 +6,32 @@
 	<insert id="regist"
 		parameterType="cn.bs.entity.Worker">
 		insert into worker
-(uName,pwd,phone,mail) 
-values
-(#{uName},#{pwd},#{phone},#{mail})
+			(uName,pwd,phone,mail) 
+		values
+			(#{uName},#{pwd},#{phone},#{mail})
 	</insert>
 	
-	<!-- <delete id="deleteOrder" parameterType="int">
+	<!-- <delete id="deleteWorker" parameterType="int">
 	    delete 
-	    from tbl_order 
+	    from worker 
 	    where 
-	    id =#{id}
+	    uid =#{uid}
 	</delete> -->
 	
 	<update id="update" parameterType="cn.bs.entity.Worker">
-	    update 
-	    worker 
-	    set uName = #{uName},pwd = #{pwd},
-	    phone = #{phone},
-	   	mail = #{mail}
+	    update	worker 
+	    <set>
+	    	<if test="uName != null">uName = #{uName},</if>
+	    	<if test="pwd != null">pwd = #{pwd},</if>
+	    	<if test="mail != null">mail = #{mail},</if>
+	    	<if test="phone != null">phone = #{phone}</if>
+	    </set>
 	    where id=#{id}
 	</update>
 	
 	<select id="findUser"	
 		resultType="list">
-		select *
-			from
-		worker
+		select * from  worker
 	</select>
 	
 	<select id="findByName"	
@@ -40,8 +40,7 @@ values
 		select *
 			from
 		worker
-		where
-			uName=#{uName}
+			where uName=#{uName}
 	</select>
 		
 </mapper>

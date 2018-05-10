@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
 
 import cn.bs.dao.ProjectDao;
@@ -41,7 +42,7 @@ public class ProjectServiceImpl implements ProjectService {
 
 	public boolean delete(int id) {
 		if(id<0) {
-			throw new NameException("发生了未知错误，请选择要删除的记录重启尝试");
+			throw new NameException("发生了未知错误，请选择要删除的记录并重新尝试");
 		}
 		boolean isSuccess = projectDao.delete(id);
 		if(!isSuccess) {
@@ -52,7 +53,7 @@ public class ProjectServiceImpl implements ProjectService {
 
 	public Project search(int id) {
 		if(id<0) {
-			throw new NameException("发生了未知错误，请选择要删除的记录重启尝试");
+			throw new NameException("发生了未知错误，请选择要删除的记录并重新尝试");
 		}
 		Project project = projectDao.serarch(id);
 		if(project == null) {
@@ -72,6 +73,10 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 		List<Project> list = projectDao.findProjectsByStatus(status);
 		return list;
+	}
+	
+	public boolean uploadImg(HttpRequest request) {
+		return true;
 	}
 	
 }

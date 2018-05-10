@@ -6,14 +6,14 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import cn.bs.dao.TicketDao;
-import cn.bs.entity.Ticket;
+/*import cn.bs.dao.TicketDao;
+import cn.bs.entity.Ticket;*/
 
 
 
 public class TicketDaoTestCase 
 	extends BaseTestCase{
-	TicketDao tdao;
+	/*TicketDao tdao;
 	
 	@Before
 	public void initDao(){
@@ -50,7 +50,7 @@ public class TicketDaoTestCase
 		for(Map<String,Object> map:data){
 			System.out.println(map);
 		}
-	}
+	}*/
 }
 
 

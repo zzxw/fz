@@ -79,8 +79,23 @@ public class NUserServiceImpl implements NUserService {
 		}
 	}
 
-	public List<String> findUsers() {
-		List<NUser> list = nUserDao.findUsers();
+	public List<String> findUsersByMajor(String major) {
+		if(Tools.isEmpty(major)) {
+			major = "";
+		}
+		List<NUser> list = nUserDao.findUsersByMajor(major);
+		List<String> result = new ArrayList<String>();
+		for (NUser nUser : list) {
+			result.add(nUser.getuName());
+		}
+		return result;
+	}
+	
+	public List<String> findUsersByType(int userType) {
+		if(userType < 0){
+			userType = 0;
+		}
+		List<NUser> list = nUserDao.findUsersByType(userType);
 		List<String> result = new ArrayList<String>();
 		for (NUser nUser : list) {
 			result.add(nUser.getuName());

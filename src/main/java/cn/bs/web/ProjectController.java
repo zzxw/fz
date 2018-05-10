@@ -4,22 +4,18 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.bs.entity.NUser;
 import cn.bs.entity.Project;
-import cn.bs.entity.User;
 import cn.bs.service.ProjectService;
-import cn.bs.service.UserService;
 import cn.bs.util.JsonResult;
 
 @Controller
 @RequestMapping("/Project")
 public class ProjectController {
-	@Resource
-	private UserService userService;
 	
 	@Resource
 	private ProjectService projectService;
@@ -90,4 +86,17 @@ public class ProjectController {
 		return new JsonResult<List<Project>>(list);
 	}
 	
+	@RequestMapping("/searchProjectsByStatus.do")
+	@ResponseBody
+	public JsonResult<List<Project>> searchProjects(int status){
+		List<Project> list = projectService.findProjectsByStatus(status);
+		return new JsonResult<List<Project>>(list);
+	}
+	
+	@RequestMapping("/upload.do")
+	@ResponseBody
+	public JsonResult<Boolean> uploadImg(HttpRequest request){
+		//List<Project> list = projectService.findProjectsByStatus(status);
+		return new JsonResult<Boolean>(true);
+	}
 }

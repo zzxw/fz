@@ -12,19 +12,27 @@ values
 	</insert>
 	<delete id="delete" parameterType="int">
 	    delete 
-	    from projects 
+	    	from projects 
 	    where 
-	    pid =#{pid}
+	    	pid = #{pid}
 	</delete>
 	
 	<update id="update" parameterType="cn.bs.entity.Project">
-	    update 
-    	projects 
-	    set uid = #{uid},checkId = #{checkId},
-	    authorizedId = #{authorizedId},
-	   	majorType = #{majorType},pName = #{pName},pType=#{pType},cPhone = #{cPhone},status = #{status},
-	    contacts = #{contacts},unitName=#{unitName} ,blueprint=#{blueprint}
-    	where pid=#{pid}
+	    update  projects 
+    	<set>
+    		<if test="uid != null">uid = #{uid>,</if>
+    		<if test="checkId != null">checkId = #{checkId>,</if>
+    		<if test="authorizedId != null">authorizedId = #{authorizedId>,</if>
+    		<if test="majorType != null">majorType = #{majorType>,</if>
+    		<if test="pName != null">pName = #{pName>,</if>
+    		<if test="pType != null">pType = #{pType>,</if>
+    		<if test="cPhone != null">cPhone = #{cPhone>,</if>
+    		<if test="status != null">status = #{status>,</if>
+    		<if test="contacts != null">contacts = #{contacts>,</if>
+    		<if test="unitName != null">unitName = #{unitName>,</if>
+    		<if test="blueprint != null">blueprint = #{blueprint></if>
+    	</set>
+    		where pid=#{pid}
 	</update>
 	
 	<select id="search"	
@@ -39,19 +47,11 @@ values
 	
 	<select id="findProjects"	
 		resultType="list">
-		select *
-			from
-		projects
+		select * from projects
 	</select>
-		
+	<select id="findProjectsByStatus"
+		parameterType="int"
+		resultType="list">
+		select * from projects where status = #{status}
+	</select>
 </mapper>
-
-
-
-
-
-
-
-
-
-

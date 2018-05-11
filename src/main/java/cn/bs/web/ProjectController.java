@@ -25,8 +25,8 @@ public class ProjectController {
 	//返回值：{state:0,data:{id...}}
 	//返回值：{state:1,message:"用户名..."}
 
-	public JsonResult<Project> add(int uid,String name,int checkId,int authorizedId,String majorType,String pName,
-			int pType,String unitName,String contacts,String cPhone,int status,String blueprint){
+	public JsonResult<Project> add(Integer uid,String name,Integer checkId,Integer authorizedId,String majorType,String pName,
+			Integer pType,String unitName,String contacts,String cPhone,Integer status,String blueprint){
 		Project project = new Project();
 		project.setAuthorizedId(authorizedId);
 		project.setBlueprint(blueprint);
@@ -67,14 +67,14 @@ public class ProjectController {
 	}
 	@RequestMapping("/delete.do")
 	@ResponseBody
-	public JsonResult<Boolean> delete(int id){
+	public JsonResult<Boolean> delete(Integer id){
 		boolean isTrue = projectService.delete(id);
 		return new JsonResult<Boolean>(isTrue);
 	}
 	
 	@RequestMapping("/find.do")
 	@ResponseBody
-	public JsonResult<Project> find(int id){
+	public JsonResult<Project> find(Integer id){
 		Project project = projectService.search(id);
 		return new JsonResult<Project>(project);
 	}
@@ -88,7 +88,7 @@ public class ProjectController {
 	
 	@RequestMapping("/searchProjectsByStatus.do")
 	@ResponseBody
-	public JsonResult<List<Project>> searchProjects(int status){
+	public JsonResult<List<Project>> searchProjects(Integer status){
 		List<Project> list = projectService.findProjectsByStatus(status);
 		return new JsonResult<List<Project>>(list);
 	}

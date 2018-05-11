@@ -20,7 +20,7 @@ public class NUserController {
 	
 	@RequestMapping("/regist.do")
 	@ResponseBody
-	public JsonResult<NUser> regist(String uName,String pwd,String phone,String mail,String address,String major,int userType){
+	public JsonResult<NUser> regist(String uName,String pwd,String phone,String mail,String address,String major,Integer userType){
 		NUser nUser = new NUser();
 		nUser.setAddress(address);
 		nUser.setMail(mail);
@@ -34,8 +34,9 @@ public class NUserController {
 	}
 	@RequestMapping("/update.do")
 	@ResponseBody
-	public JsonResult<NUser> changePW
-	(String uName,String pwd,String phone,String mail,String address,String major,int userType){
+	public JsonResult<Boolean> changePW
+	(String uName,String pwd,String phone,String mail,String address,String major,Integer userType){
+		String oldName = "";
 		NUser nUser = new NUser();
 		nUser.setAddress(address);
 		nUser.setMajor(major);
@@ -44,8 +45,8 @@ public class NUserController {
 		nUser.setPwd(pwd);
 		nUser.setUserType(userType);
 		nUser.setuName(uName);
-		NUser user=nService.regist(nUser);
-		return new JsonResult<NUser>(user);
+		boolean isSuccess=nService.updateInfo(oldName,nUser);
+		return new JsonResult<Boolean>(isSuccess);
 	}
 	
 	@RequestMapping("/find.do")
@@ -64,7 +65,7 @@ public class NUserController {
 	
 	@RequestMapping("/findUsersByType.do")
 	@ResponseBody
-	public JsonResult<List<String>> findUsersByType(int userType){
+	public JsonResult<List<String>> findUsersByType(Integer userType){
 		List<String> list = nService.findUsersByType(userType);
 		return new JsonResult<List<String>>(list);
 	}

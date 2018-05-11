@@ -1,20 +1,20 @@
 package cn.bs.entity;
 
 public class NUser {
-	private int uid;
+	private Integer uid;
 	private String uName;
 	private String pwd;
 	private String phone;
 	private String mail;
 	private String address;
 	private String major;
-	private int userType;
+	private Integer userType;
 	
 	public NUser() {
 		super();
 	}
 	
-	public NUser(int uid, String uName, String pwd,String mail,int userType,String phone, String address, String major) {
+	public NUser(Integer uid, String uName, String pwd,String mail,Integer userType,String phone, String address, String major) {
 		super();
 		this.uid = uid;
 		this.uName = uName;
@@ -33,7 +33,7 @@ public class NUser {
 	public int getUid() {
 		return uid;
 	}
-	public void setUid(int uid) {
+	public void setUid(Integer uid) {
 		this.uid = uid;
 	}
 	public String getuName() {
@@ -79,7 +79,7 @@ public class NUser {
 		return userType;
 	}
 
-	public void setUserType(int userType) {
+	public void setUserType(Integer userType) {
 		this.userType = userType;
 	}
 	

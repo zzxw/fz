@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+//import org.springframework.util.DigestUtils;
+
 import cn.bs.dao.NUserDao;
 import cn.bs.entity.NUser;
 import cn.bs.service.NUserService;
@@ -46,6 +48,7 @@ public class NUserServiceImpl implements NUserService {
 			throw new NameException("该用户名已存在！！！请更换用户名重新注册");
 		}
 		checkInfo(user);
+		//String pwd = DigestUtils.md5Digest(user.getPwd() + "Hello,World");
 		int i = nUserDao.regist(user);
 		if(i!=1){
 			throw new NameException("注册失败，请重新尝试");
@@ -53,10 +56,9 @@ public class NUserServiceImpl implements NUserService {
 		return user;
 	}
 
-	public boolean updateInfo(NUser user) {
-		if(Tools.isEmpty(user.getuName() + user.getPwd())){
-			throw new NameException("用户名或密码不能为空");
-		}
+	public boolean updateInfo(String userName,NUser user) {
+		NUser nUser = findByName(userName);
+		user.setUid(nUser.getUid());
 		checkInfo(user);
 		int i = nUserDao.updateInfo(user);
 		if(i!=1){
@@ -101,5 +103,20 @@ public class NUserServiceImpl implements NUserService {
 			result.add(nUser.getuName());
 		}
 		return result;
+	}
+
+	public boolean changePwd(String userName,String pwd, String newPwd) {
+		if(Tools.isEmpty(newPwd)) {
+			throw new NameException("新密码不能为空，请填写后重写尝试");
+		}
+		NUser user = findByName(userName);
+		if(pwd==null || !pwd.equals(user.getPwd())) {
+			throw new NameException("密码不正确，请检查后重新输入");
+		}
+		String passwordReg= "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$";
+		if(!newPwd.matches(passwordReg)) {
+			throw new PasswordException("密码要在8-16字符之间，且必须为数字和字母的组合");
+		}
+		return nUserDao.changePwd(userName,newPwd)==1;
 	}
 }

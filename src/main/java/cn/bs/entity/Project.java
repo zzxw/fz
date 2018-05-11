@@ -1,17 +1,17 @@
 package cn.bs.entity;
 
 public class Project {
-	private int pid;
-	private int uid;
-	private int checkId;
-	private int authorizedId;
+	private Integer pid;
+	private Integer uid;
+	private Integer checkId;
+	private Integer authorizedId;
 	private String majorType;
 	private String pName;
-	private int pType;
+	private Integer pType;
 	private String unitName;
 	private String contacts;
 	private String cPhone;
-	private int status;
+	private Integer status;
 	private String blueprint;
 	
 	public Project() {
@@ -19,8 +19,8 @@ public class Project {
 	}
 
 	
-	public Project(int pid, int uid, int checkId, int authorizedId, String majorType, String pName, int pType,
-			String unitName, String contacts, String cPhone, int status, String blueprint) {
+	public Project(Integer pid, Integer uid, Integer checkId, Integer authorizedId, String majorType, String pName, Integer pType,
+			String unitName, String contacts, String cPhone, Integer status, String blueprint) {
 		super();
 		this.pid = pid;
 		this.uid = uid;
@@ -41,7 +41,7 @@ public class Project {
 		return pid;
 	}
 
-	public void setPid(int pid) {
+	public void setPid(Integer pid) {
 		this.pid = pid;
 	}
 
@@ -81,7 +81,7 @@ public class Project {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
@@ -97,7 +97,7 @@ public class Project {
 		return uid;
 	}
 
-	public void setUid(int uid) {
+	public void setUid(Integer uid) {
 		this.uid = uid;
 	}
 
@@ -107,7 +107,7 @@ public class Project {
 	}
 
 
-	public void setCheckId(int checkId) {
+	public void setCheckId(Integer checkId) {
 		this.checkId = checkId;
 	}
 
@@ -117,7 +117,7 @@ public class Project {
 	}
 
 
-	public void setAuthorizedId(int authorizedId) {
+	public void setAuthorizedId(Integer authorizedId) {
 		this.authorizedId = authorizedId;
 	}
 
@@ -127,7 +127,7 @@ public class Project {
 	}
 
 
-	public void setpType(int pType) {
+	public void setpType(Integer pType) {
 		this.pType = pType;
 	}
 

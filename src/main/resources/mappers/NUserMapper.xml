@@ -17,20 +17,22 @@
 	    where 
 	    id =#{id}
 	</delete> -->
-	
+	<update id="changePwd" parameterType="string">
+		update users 
+		set pwd=#{pwd} where uName=#{uName}
+	</update>
 	<update id="updateInfo" parameterType="cn.bs.entity.NUser">
 	    update 
 	    	users 
 	    <set>
 	    	<if test="uName != null">uName=#{uName},</if>
-	    	<if test="pwd != null">pwd=#{pwd},</if>
 	    	<if test="phone != null">phone=#{phone},</if>
 	    	<if test="mail != null">mail=#{mail},</if>
 	    	<if test="address != null">address=#{address},</if>
 	    	<if test="userType != null">userType=#{userType},</if>
 	    	<if test="major != null">major=#{major}</if>
 	    </set> 
-		    where id=#{id}
+		    where uid=#{uid}
 	</update>
 	
 	<select id="findByName"	
